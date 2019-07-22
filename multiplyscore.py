@@ -16,8 +16,6 @@ if (r == []):
 f1 = 0
 f2 = 0
 
-
-
 def application(environ, start_response):
     headers = [('Content-Type', 'text/html; charset=utf-8')]
 
@@ -66,7 +64,6 @@ def application(environ, start_response):
         [un, pw] = cookies['session'].value.split(':')
         user = cursor.execute('SELECT * FROM users WHERE username = ? AND password = ?', [un, pw]).fetchall()
 
-        #This is where the game begins. This section of is code only executed if the login form works, and if the user is successfully logged in
         if user:
             correct = 0
             wrong = 0
@@ -168,7 +165,6 @@ def application(environ, start_response):
     else:
         start_response('404 Not Found', headers)
         return ['Status 404: Resource not found'.encode()]
-
 
 httpd = wsgiref.simple_server.make_server('', 8000, application)
 print('localhost:8000/')
